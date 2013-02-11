@@ -1,9 +1,6 @@
-/*
 
-	INSTRUCTIONS:
-	This file must be copied into ./App in order to work
 
-*/
+
 var w = window.innerWidth;
 var h = window.innerHeight;
 var w2 = w/2;
@@ -14,6 +11,7 @@ var lastCalledTime = new Date().getTime();
 var fps;
 var frameCount = 100;
 var frames = frameCount;
+
 
 function newFrame() {
     
@@ -26,11 +24,10 @@ function newFrame() {
     fps = 1/delta*frameCount;
     
 
-    console.log('FPS: ' + fps + ' curves: ' + maxCurves + ' width: ' + ctx.lineWidth);
+    log('FPS: ' + fps + ' curves: ' + maxCurves + ' width: ' + ctx.lineWidth);
     frames = frameCount;
 }
 
-var canvas = document.getElementById('canvas');
 canvas.width = w;
 canvas.height = h;
 
@@ -48,13 +45,17 @@ for( var i = 0; i < 200; i++ ) {
 
 var p = [0,0, 0,0, 0,0, 0,0];
 var animate = function() {
+	//log('animate');
+	
+
+      
 	// Clear the screen - note that .globalAlpha is still honored,
 	// so this will only "darken" the sceen a bit
-	ctx.globalCompositeOperation = 'source-over';
+	//ctx.globalCompositeOperation = 'source-over';
 	ctx.fillRect(0,0,w,h);
 
 	// Use the additive blend mode to draw the bezier curves
-	ctx.globalCompositeOperation = 'lighter';
+	//ctx.globalCompositeOperation = 'lighter';
 
 	// Calculate curve positions and draw
 	for( var i = 0; i < maxCurves; i++ ) {
@@ -74,23 +75,25 @@ var animate = function() {
 		ctx.strokeStyle = curve.color;
 		ctx.stroke();
 	}
-    
+    ctx.present();
     newFrame();
+    
+    //	log('animate done');
+
 };
 
 
 // The vertical touch position controls the number of curves;
 // horizontal controls the line width
 var maxCurves = 150;
-document.addEventListener( 'touchmove', function( ev ) {
-	ctx.lineWidth = (ev.touches[0].pageX/w) * 20;
-	maxCurves = Math.floor((ev.touches[0].pageY/h) * curves.length);
-}, false );
 
 
 ctx.fillStyle = '#000000';
 ctx.fillRect( 0, 0, w, h );
 
-ctx.globalAlpha = 0.05;
+//ctx.globalAlpha = 0.05;
 ctx.lineWidth = 2;
 setInterval( animate, 16 );
+
+
+

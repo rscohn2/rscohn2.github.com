@@ -6,6 +6,11 @@
     </head>
     <body>
         <canvas id='canvas'></canvas>
+        <script>
+        		function log(message) {console.log(message);}
+        		var canvas = document.getElementById('canvas');
+        		canvas.getContext('2d').present = function(){};
+        </script>
         <script src='bezier.js'></script>
     </body>
 </html>
