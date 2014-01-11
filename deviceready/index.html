@@ -11,12 +11,14 @@
 		body { background-color:white; color:black }
 	</style>
 	<script src="cordova.js"></script>
-    <script src="file:///android_asset/www/cordova.js"></script>
+        <script src="file:///android_asset/www/cordova.js"></script>
 	<script type="text/javascript">
         console.log('starting');
         var onCordovaReady=function() {
             console.log('cordovaready');
             document.getElementById('cordovaReady').innerHTML = 'ready';
+                        refresh();
+
         }
 		/* This code is used to run as soon as Intel activates */
 		var onDeviceReady=function(){
@@ -27,15 +29,22 @@
 		};
 		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
         document.addEventListener("deviceready",onCordovaReady,false);
+        
+        var refresh = function() {
+            document.getElementById('cordovaVersion').innerHTML = device.cordova;
+
+        }
 	</script>
 </head>
 <body>
     <h1>Device Ready</h1>
-    <span>Cordova: </span>
-    <span id="cordovaReady">not ready</span>
+    <h3>Cordova: </h3>
+    <p id="cordovaReady">not ready</p>
+    <p id="cordovaVersion">version unknown</p>
     <br>
-    <span>Intelxdk: </span>
-    <span id="intelxdkReady">not ready</span>
+    <h3>Intelxdk: </h3>
+    <p id="intelxdkReady">not ready</p>
+    <input type="button" value="press" onclick="refresh()">
 	<!-- content goes here-->
 </body>
 </html>
