@@ -1,7 +1,7 @@
 <!DOCTYPE html><!--HTML5 doctype-->
 <html>
 <head>
-	<title>Your New Application</title>
+	<title>Device Ready</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
 	<style type="text/css">
@@ -15,23 +15,26 @@
         console.log('starting');
         var onCordovaReady=function() {
             console.log('cordovaready');
+            document.getElementById('cordovaReady').innerHTML = 'ready';
         }
 		/* This code is used to run as soon as Intel activates */
 		var onDeviceReady=function(){
-		//hide splash screen
-            console.log('intelxdkready');
-		intel.xdk.device.hideSplashScreen();
+		  //hide splash screen
+          console.log('intelxdkready');
+		  intel.xdk.device.hideSplashScreen();
+          document.getElementById('intelxdkReady').innerHTML = 'ready';
 		};
 		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
         document.addEventListener("deviceready",onCordovaReady,false);
 	</script>
 </head>
 <body>
+    <h1>Device Ready</h1>
     <span>Cordova: </span>
-    <span>not ready</span>
+    <span id="cordovaReady">not ready</span>
     <br>
     <span>Intelxdk: </span>
-    <span>not ready</span>
+    <span id="intelxdkReady">not ready</span>
 	<!-- content goes here-->
 </body>
 </html>
